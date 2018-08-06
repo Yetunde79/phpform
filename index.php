@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
     Zip: $zip\n
     Meeting: $available\n" ;
 
-    if (new SendGrid\Mail($from, $subject, $to, $content)) { 
+    if (new SendGrid\Mail($from, $subject, $to, $body)) { 
         echo "<script>alert('Email sent successfully');</script>";
    } else { 
        echo "<script>alert('The email could not be sent');</script>";
