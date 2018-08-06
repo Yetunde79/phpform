@@ -15,7 +15,6 @@
 
 <?php
 require 'vendor/autoload.php';
-
 if (isset($_POST['submit'])) {
     $fn = $_POST['fn'];  
     $ln =$_POST['ln'];  
@@ -28,22 +27,18 @@ if (isset($_POST['submit'])) {
     // $from ='';
     // $subject = "Client request";
     
-    $from = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
+    $from = new SendGrid\Email(null, "ysolaadebayo@gmailS.com");
     $subject = "Client request";
     $to = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
  
-
-    // $body = new SendGrid\Content("text/plain", 
-    // "From: $fn $ln\n 
-    // E-Mail: $email\n 
-    // Package: $package\n
-    // Payment method: $payment\n
-    // Zip: $zip\n
-    // Meeting: $available\n") ;
-
-    $content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
-
-    if (new SendGrid\Mail($from, $subject, $to, $content)) { 
+    $body = 
+    "From: $fn $ln\n 
+    E-Mail: $email\n 
+    Package: $package\n
+    Payment method: $payment\n
+    Zip: $zip\n
+    Meeting: $available\n" ;
+    if (new SendGrid\Mail($from, $subject, $to, $body)) { 
         echo "<script>alert('Email sent successfully');</script>";
    } else { 
        echo "<script>alert('The email could not be sent');</script>";
