@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
     $to = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
  
 
-    $body = new SendGrid\Content(null, 
+    $body = new SendGrid\Content("text/plain", 
     "From: $fn $ln\n 
     E-Mail: $email\n 
     Package: $package\n
