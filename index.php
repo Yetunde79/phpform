@@ -33,13 +33,13 @@ if (isset($_POST['submit'])) {
     $to = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
  
 
-    $body = 
+    $body = new SendGrid\Content(null, 
     "From: $fn $ln\n 
     E-Mail: $email\n 
     Package: $package\n
     Payment method: $payment\n
     Zip: $zip\n
-    Meeting: $available\n" ;
+    Meeting: $available\n") ;
 
     if (new SendGrid\Mail($from, $subject, $to, $body)) { 
         echo "<script>alert('Email sent successfully');</script>";
