@@ -40,10 +40,10 @@ if (isset($_POST['submit'])) {
     // Payment method: $payment\n
     // Zip: $zip\n
     // Meeting: $available\n") ;
-    
-    $body = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
 
-    if (new SendGrid\Mail($from, $subject, $to, $body)) { 
+    $content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
+
+    if (new SendGrid\Mail($from, $subject, $to, $content)) { 
         echo "<script>alert('Email sent successfully');</script>";
    } else { 
        echo "<script>alert('The email could not be sent');</script>";
