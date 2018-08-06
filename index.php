@@ -17,37 +17,42 @@
 require 'vendor/autoload.php';
 
 if (isset($_POST['submit'])) {
-    $fn = $_POST['fn'];  
-    $ln =$_POST['ln'];  
-    $email= $_POST['email'];  
-    $package = $_POST['package'];
-    $payment = $_POST['paymentMethod'];
-    $zip = $_POST['zip'];   
-    $available = $_POST['calendar'];
-    // $to = 'ysolaadebayo@gmail.com, ysolaadebayo@yahoo.com';
-    // $from ='';
-    // $subject = "Client request";
+//     $fn = $_POST['fn'];  
+//     $ln =$_POST['ln'];  
+//     $email= $_POST['email'];  
+//     $package = $_POST['package'];
+//     $payment = $_POST['paymentMethod'];
+//     $zip = $_POST['zip'];   
+//     $available = $_POST['calendar'];
+//     // $to = 'ysolaadebayo@gmail.com, ysolaadebayo@yahoo.com';
+//     // $from ='';
+//     // $subject = "Client request";
     
-    $from = new SendGrid\Email(null, "ysolaadebayo@gmailS.com");
-    $subject = "Client request";
-    $to = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
+//     $from = new SendGrid\Email(null, "ysolaadebayo@gmailS.com");
+//     $subject = "Client request";
+//     $to = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
  
 
-    $body = 
-    "From: $fn $ln\n 
-    E-Mail: $email\n 
-    Package: $package\n
-    Payment method: $payment\n
-    Zip: $zip\n
-    Meeting: $available\n" ;
+//     $body = 
+//     "From: $fn $ln\n 
+//     E-Mail: $email\n 
+//     Package: $package\n
+//     Payment method: $payment\n
+//     Zip: $zip\n
+//     Meeting: $available\n" ;
 
-    if (new SendGrid\Mail($from, $subject, $to, $body)) { 
-        echo "<script>alert('Email sent successfully');</script>";
-   } else { 
-       echo "<script>alert('The email could not be sent');</script>";
-   }
+//     if (new SendGrid\Mail($from, $subject, $to, $body)) { 
+//         echo "<script>alert('Email sent successfully');</script>";
+//    } else { 
+//        echo "<script>alert('The email could not be sent');</script>";
+//    }
+$from = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
+$subject = "Hello World from the SendGrid PHP Library!";
+$to = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
+$content = new SendGrid\Content("text/plain", "Hello, Email!");
+$mail = new SendGrid\Mail($from, $subject, $to, $content);
 
-   $apiKey = getenv('SENDGRID_API_KEY');
+$apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($mail);
