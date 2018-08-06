@@ -9,10 +9,13 @@
     <title>Checkout example for Bootstrap</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="form.css">
 
 </head>
 
 <?php
+require 'vendor/autoload.php';
+
 if (isset($_POST['submit'])) {
     $fn = $_POST['fn'];  
     $ln =$_POST['ln'];  
@@ -21,11 +24,15 @@ if (isset($_POST['submit'])) {
     $payment = $_POST['paymentMethod'];
     $zip = $_POST['zip'];   
     $available = $_POST['calendar'];
-    $to = 'ysolaadebayo@gmail.com, ysolaadebayo@yahoo.com';
-    $from ='';
-    $subject = "Client request";
+    // $to = 'ysolaadebayo@gmail.com, ysolaadebayo@yahoo.com';
+    // $from ='';
+    // $subject = "Client request";
     
-  
+    $from = new SendGrid\Email(null, "ysolaadebayo@yahoo.com");
+    $subject = "Client request";
+    $to = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
+ 
+
     $body = 
     "From: $fn $ln\n 
     E-Mail: $email\n 
@@ -34,11 +41,19 @@ if (isset($_POST['submit'])) {
     Zip: $zip\n
     Meeting: $available\n" ;
 
-    if (mail ($to, $subject, $body, $from)) { 
+    if (new SendGrid\Mail($from, $subject, $to, $content)) { 
         echo "<script>alert('Email sent successfully');</script>";
    } else { 
        echo "<script>alert('The email could not be sent');</script>";
    }
+
+   $apiKey = getenv('SENDGRID_API_KEY');
+$sg = new \SendGrid($apiKey);
+
+$response = $sg->client->mail()->send()->post($mail);
+echo $response->statusCode();
+echo $response->headers();
+echo $response->body();
 }
 ?>
 
@@ -48,21 +63,34 @@ if (isset($_POST['submit'])) {
 
     <div class="container">
         <div class="py-5 text-center">
-            <h2>Checkout form</h2>
-            <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form group has a validation
-                state that can be triggered by attempting to submit the form without completing it.</p>
+            <h2>Photographer portfolio</h2>
         </div>
 
         
         <form action="" method="post">
-        <h4 class="mb-3">Package</h4>
+                <h4 class="mb-3">Packages</h4>
+               <div class="d-block my-3 middle">
+                        <label>
+                            <input type="radio" name="package" value="Package 1" checked/>
+                            <div class="box">
+                                <span>Package 1</span>
+                            </div>
+                        </label>
 
-                <div class="d-block my-3">
-                        <input type="radio" name="package" value="Package 1" required="">Package 1
-                        <input type="radio" name="package" value="Package 2" required="">Package 2
-                        <input type="radio" name="package" value="Package 3" required="">Package 3      
+                          <label>
+                            <input type="radio" name="package" value="Package 2" checked/>
+                            <div class="box">
+                                <span>Package 2</span>
+                            </div>
+                        </label>
+
+                       <label>
+                            <input type="radio" name="package" value="Package 3" checked/>
+                            <div class="box">
+                                <span>Package 3</span>
+                            </div>
+                        </label>
                 </div>
-                <hr class="mb-4">
 
                 <div class="d-block my-3">
                 <h4 class="mb-3">Days photographer is available </h4>
@@ -120,26 +148,44 @@ if (isset($_POST['submit'])) {
                         <hr class="mb-4">
                         <h4 class="mb-3">Payment</h4>
 
-                    <div class="d-block my-3">
-                        <div class="custom-control custom-radio">
-                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" required="" value="Cash">
-                            <label class="custom-control-label" for="credit">Cash</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="" value="Venmo">
-                            <label class="custom-control-label" for="debit">Venmo</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="" value="Paypal">
-                            <label class="custom-control-label" for="paypal">Paypal</label>
-                        </div>
-                     </div>
+                    <div class="d-block my-3 middle">
+                        <label>
+                            <input type="radio" name="paymentMethod" value="Cash" checked/>
+                            <div class="box">
+                                <span>Cash</span>
+                            </div>
+                        </label>
 
+                        <label>
+                            <input type="radio" name="paymentMethod" value="Venmo"/>
+                            <div class="box">
+                                <span>Venmo</span>
+                            </div>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="paymentMethod" value="Paypal"/>
+                            <div class="box">
+                                <span>Paypal</span>
+                            </div>
+                        </label>
+                    </div>
                 
                         <hr class="mb-4"> 
                         <button class="btn btn-primary btn-lg btn-block" type="submit" name="submit">Continue to checkout</button>
         </form>
+
+        <hr class="mb-4">
         
+        <h3>Portfolio</h3>
+
+        <div class="portfolio"> 
+            <div><img src="/pic.jpg"></div>
+            <div><img src="/pic.jpg"></div>
+            <div><img src="/pic.jpg"></div>
+            <div><img src="/pic.jpg"></div>
+            <div><img src="/pic.jpg"></div>
+        </div>
         
 
         <footer class="my-5 pt-5 text-muted text-center text-small">

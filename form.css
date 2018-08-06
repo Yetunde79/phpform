@@ -1,0 +1,50 @@
+
+html {
+  background-color: #1a1a1a;
+ 
+}
+
+
+input[type="radio"] {
+   display: none;
+   visibility:hidden;
+}
+
+input:checked + div {
+    background: #007e90;
+    color: white;
+}
+
+
+.middle h1 {
+    font-family: sans-serif;
+    color: white;
+}
+
+.box {
+    width: 150px;
+    height: 50px;
+    background-color: white;
+    transition: all 250ms ease;
+    will-change: transition;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    font-family: sans-serif;
+    font-weight: 900;
+  } 
+
+  .portfolio{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    
+  }
+  
+img{
+    max-width: 100%;
+    height: auto;
+    width: auto\9;
+}
