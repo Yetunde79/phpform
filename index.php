@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
     // $from ='';
     // $subject = "Client request";
     
-    $from = new SendGrid\Email(null, "ysolaadebayo@gmailS.com");
+    $from = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
     $subject = "Client request";
     $to = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
  
