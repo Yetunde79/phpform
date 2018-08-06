@@ -28,31 +28,28 @@ if (isset($_POST['submit'])) {
     // $subject = "Client request";
     
     $from = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
-    $subject = "Client request";
+    $subject = "Hello World from the SendGrid PHP Library!";
     $to = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
- 
-    $body = 
-    "From: $fn $ln\n 
-    E-Mail: $email\n 
-    Package: $package\n
-    Payment method: $payment\n
-    Zip: $zip\n
-    Meeting: $available\n" ;
-    if (new SendGrid\Mail($from, $subject, $to, $body)) { 
-        echo "<script>alert('Email sent successfully');</script>";
-   } else { 
-       echo "<script>alert('The email could not be sent');</script>";
-   }
+    $content = new SendGrid\Content("text/plain", 
+       "From: $fn $ln\n 
+         E-Mail: $email\n 
+         Package: $package\n
+         Payment method: $payment\n
+         Zip: $zip\n
+         Meeting: $available\n");
+    $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
 
-$apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+    $apiKey = getenv('SENDGRID_API_KEY');
+    $sg = new \SendGrid($apiKey);
+    $response = $sg->client->mail()->send()->post($mail);
+    echo $response->statusCode();
+    echo $response->headers();
+    echo $response->body();
+    }
 
-$response = $sg->client->mail()->send()->post($mail);
-echo $response->statusCode();
-echo $response->headers();
-echo $response->body();
-}
+
+
 ?>
 
 
