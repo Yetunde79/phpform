@@ -23,20 +23,18 @@ if (isset($_POST['submit'])) {
     $payment = $_POST['paymentMethod'];
     $zip = $_POST['zip'];   
     $available = $_POST['calendar'];
-    // $to = 'ysolaadebayo@gmail.com, ysolaadebayo@yahoo.com';
-    // $from ='';
-    // $subject = "Client request";
     
     $from = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
-    $subject = "Hello World from the SendGrid PHP Library!";
+    $subject = "Client Request!";
     $to = new SendGrid\Email(null, "ysolaadebayo@gmail.com");
     $content = new SendGrid\Content("text/plain", 
-       "From: $fn $ln\n 
+        "From: $fn $ln\n 
          E-Mail: $email\n 
          Package: $package\n
          Payment method: $payment\n
          Zip: $zip\n
-         Meeting: $available\n");
+         Meeting: $available\n"
+        );
     $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
 
