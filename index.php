@@ -9,7 +9,7 @@
     <title>Checkout example for Bootstrap</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="/resources/css/form.css">
 
 </head>
 
@@ -45,9 +45,6 @@ if (isset($_POST['submit'])) {
     echo $response->headers();
     echo $response->body();
     }
-
-
-
 ?>
 
 
@@ -168,18 +165,6 @@ if (isset($_POST['submit'])) {
                         <button class="btn btn-primary btn-lg btn-block" type="submit" name="submit">Continue to checkout</button>
         </form>
 
-        <hr class="mb-4">
-        
-        <h3>Portfolio</h3>
-
-        <div class="portfolio"> 
-            <div><img src="/pic.jpg"></div>
-            <div><img src="/pic.jpg"></div>
-            <div><img src="/pic.jpg"></div>
-            <div><img src="/pic.jpg"></div>
-            <div><img src="/pic.jpg"></div>
-        </div>
-        
 
         <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">© 2017-2018 Company Name</p>
